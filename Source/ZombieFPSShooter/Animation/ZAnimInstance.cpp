@@ -8,7 +8,8 @@
 UZAnimInstance::UZAnimInstance()
 {
 	MovingThreshold = 3.0f;
-	JumpingThreshold = 100.f;
+	JumpingThreshold = 100.0f;
+	RunningThreshold = 10.0f;
 }
 
 void UZAnimInstance::NativeInitializeAnimation()
@@ -25,5 +26,17 @@ void UZAnimInstance::NativeInitializeAnimation()
 
 void UZAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 {
+	// 업데이트 함수로, 여기에서 실제 필요한 값을 얻어온다.
+	Super::NativeUpdateAnimation(DeltaSeconds);
+
+	if (Movement)
+	{
+		Velocity = Movement->Velocity;
+		GroundSpeed = Velocity.Size2D();
+		bIsIdle = GroundSpeed < bIsIdle;
+		bIsFalling = Movement->IsFalling();
+		bIsJumping = bIsFalling & (JumpingThreshold < Velocity.Z);
+		bIsRunning = RunningThreshold <= GroundSpeed;
+	}
 }
 

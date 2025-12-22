@@ -73,9 +73,13 @@ void AZCharacterPlayer::Move(const FInputActionValue& Value)
 {
 	FVector2D MovementVector = Value.Get<FVector2D>();
 
+	const FRotator Rotation = Controller->GetControlRotation();
+	const FRotator YawPosition(0, Rotation.Yaw, 0);
+
 	// 어디가 앞인지 찾고, 플레이어가 그쪽으로 움직이려 함을 기록합니다.
-	FVector ForewardDirection = FRotationMatrix(Controller->GetControlRotation()).GetScaledAxis(EAxis::X);
-	FVector RightDirection = FRotationMatrix(Controller->GetControlRotation()).GetScaledAxis(EAxis::Y);
+	FVector ForewardDirection = FRotationMatrix(YawPosition).GetUnitAxis(EAxis::X);
+	FVector RightDirection = FRotationMatrix(YawPosition).GetUnitAxis(EAxis::Y);
+
 	AddMovementInput(ForewardDirection, MovementVector.Y);
 	AddMovementInput(RightDirection, MovementVector.X);
 }

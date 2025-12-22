@@ -62,4 +62,8 @@ protected:
 	// 달리기 여부
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Character)
 	uint8 bIsRunning : 1;
+
+	// 달리기 기준 속도
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Character)
+	float RunningThreshold;
 };
