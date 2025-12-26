@@ -27,6 +27,10 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+/* Blueprint event */
+public:
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnMove(float x, float y);
 
 private:
 	void InitializeCharacterControl();
@@ -37,6 +41,7 @@ private:
 	void Look(const struct FInputActionValue& Value);
 	void StartJump();
 	void StopJump();
+	
 
 private:
 	UPROPERTY(EditAnywhere, Category = "Input")

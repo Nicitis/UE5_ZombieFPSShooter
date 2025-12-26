@@ -82,6 +82,8 @@ void AZCharacterPlayer::Move(const FInputActionValue& Value)
 
 	AddMovementInput(ForewardDirection, MovementVector.Y);
 	AddMovementInput(RightDirection, MovementVector.X);
+
+	OnMove(MovementVector.X, MovementVector.Y);
 }
 
 /// <summary>
