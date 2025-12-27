@@ -47,6 +47,10 @@ void AZCharacterPlayer::SetupPlayerInputComponent(class UInputComponent* PlayerI
 	Input->BindAction(LookAction, ETriggerEvent::Triggered, this, &AZCharacterPlayer::Look);
 	Input->BindAction(JumpAction, ETriggerEvent::Started, this, &AZCharacterPlayer::StartJump);
 	Input->BindAction(JumpAction, ETriggerEvent::Completed, this, &AZCharacterPlayer::StopJump);
+	Input->BindAction(CrouchAction, ETriggerEvent::Started, this, &AZCharacterPlayer::StartCrouch);
+	Input->BindAction(CrouchAction, ETriggerEvent::Completed, this, &AZCharacterPlayer::StopCrouch);
+	Input->BindAction(SprintAction, ETriggerEvent::Started, this, &AZCharacterPlayer::StartSprint);
+	Input->BindAction(SprintAction, ETriggerEvent::Completed, this, &AZCharacterPlayer::StopSprint);
 }
 
 /// <summary>
@@ -83,7 +87,7 @@ void AZCharacterPlayer::Move(const FInputActionValue& Value)
 	AddMovementInput(ForewardDirection, MovementVector.Y);
 	AddMovementInput(RightDirection, MovementVector.X);
 
-	OnMove(MovementVector.X, MovementVector.Y);
+	OnMovedInput(MovementVector.X, MovementVector.Y);
 }
 
 /// <summary>

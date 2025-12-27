@@ -27,11 +27,6 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-/* Blueprint event */
-public:
-	UFUNCTION(BlueprintImplementableEvent)
-	void OnMove(float x, float y);
-
 private:
 	void InitializeCharacterControl();
 	
@@ -42,7 +37,7 @@ private:
 	void StartJump();
 	void StopJump();
 	
-
+/* Inputs */
 private:
 	UPROPERTY(EditAnywhere, Category = "Input")
 	TSoftObjectPtr<class UInputMappingContext> InputMapping;
@@ -56,6 +51,16 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Input")
 	TObjectPtr<class UInputAction> JumpAction;
 
+	UPROPERTY(EditAnywhere, Category = "Input")
+	TObjectPtr<class UInputAction> CrouchAction;
+
+	UPROPERTY(EditAnywhere, Category = "Input")
+	TObjectPtr<class UInputAction> SprintAction;
+
+/* Character Components */
+private:
 	UPROPERTY(EditAnywhere, Category = "Camera")
 	TObjectPtr<class UCameraComponent> FPSCameraComponent;
+
+
 };
