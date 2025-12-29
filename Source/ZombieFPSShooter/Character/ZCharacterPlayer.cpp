@@ -117,3 +117,23 @@ void AZCharacterPlayer::StopJump()
 {
 	bPressedJump = false;
 }
+
+/// <summary>
+/// 달리기를 시작합니다.
+/// 달리기를 시도하는지 여부를 bSprintToggle로 기록합니다.
+/// </summary>
+void AZCharacterPlayer::TryStartSprint()
+{
+	bSprintToggle = true;
+	StartSprint();
+}
+
+/// <summary>
+/// 달리기를 멈춥니다.
+/// 달리기를 시도하는지 여부를 bSprintToggle로 기록합니다.
+/// </summary>
+void AZCharacterPlayer::TryStopSprint()
+{
+	bSprintToggle = false;
+	StopSprint();
+}

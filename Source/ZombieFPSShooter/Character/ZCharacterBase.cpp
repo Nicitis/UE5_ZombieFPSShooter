@@ -59,9 +59,16 @@ void AZCharacterBase::StartCrouch()
 {
 	bCrouchToggle = true;
 
+	if (MovementMode == EZMovementMode::Sprinting)
+	{
+		StopSprint();
+	}
+
 	if (!GetCharacterMovement()->IsFalling())
 	{
+		MovementMode = EZMovementMode::Crouching;
 		bWantsToStandUp = false;
+
 		OnCrouched();
 	}
 }
@@ -71,7 +78,7 @@ void AZCharacterBase::StartCrouch()
 /// </summary>
 void AZCharacterBase::StopCrouch()
 {
-	//bCrouchToggle = false;
+	bCrouchToggle = false;
 	bWantsToStandUp = true;
 }
 
@@ -80,9 +87,11 @@ void AZCharacterBase::StopCrouch()
 /// </summary>
 void AZCharacterBase::StartSprint()
 {
-	bSprintToggle = true;
-
-	GetCharacterMovement()->MaxWalkSpeed = BaseWalkSpeed * SprintSpeedMultiplier;
+	if (MovementMode == EZMovementMode::Walking)
+	{
+		MovementMode = EZMovementMode::Sprinting;
+		GetCharacterMovement()->MaxWalkSpeed = BaseWalkSpeed * SprintSpeedMultiplier;
+	}
 }
 
 /// <summary>
@@ -90,9 +99,11 @@ void AZCharacterBase::StartSprint()
 /// </summary>
 void AZCharacterBase::StopSprint()
 {
-	bSprintToggle = false;
-
-	GetCharacterMovement()->MaxWalkSpeed = BaseWalkSpeed;
+	if (MovementMode == EZMovementMode::Sprinting)
+	{
+		MovementMode = EZMovementMode::Walking;
+		GetCharacterMovement()->MaxWalkSpeed = BaseWalkSpeed;
+	}
 }
 
 /// <summary>
@@ -128,8 +139,8 @@ void AZCharacterBase::TryToStandUp()
 
 	if (!bHit)
 	{
+		MovementMode = EZMovementMode::Walking;
 		bWantsToStandUp = false;
-		bCrouchToggle = false;
 		OnStandedUp(); 
 	}
 }

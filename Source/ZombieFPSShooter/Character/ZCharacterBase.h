@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "EZMovementMode.h"
 #include "ZCharacterBase.generated.h"
 
 UCLASS()
@@ -80,4 +81,7 @@ protected:
 	// If the player tries to stand up in a crouch status, this flag will be enabled.
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Character)
 	uint8 bWantsToStandUp : 1;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Character")
+	EZMovementMode MovementMode;
 };

@@ -36,7 +36,9 @@ private:
 	void Look(const struct FInputActionValue& Value);
 	void StartJump();
 	void StopJump();
-	
+	void TryStartSprint();
+	void TryStopSprint();
+
 /* Inputs */
 private:
 	UPROPERTY(EditAnywhere, Category = "Input")
@@ -61,6 +63,5 @@ private:
 private:
 	UPROPERTY(EditAnywhere, Category = "Camera")
 	TObjectPtr<class UCameraComponent> FPSCameraComponent;
-
 
 };
