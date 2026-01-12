@@ -60,8 +60,8 @@ private:
 	TObjectPtr<class UInputAction> SprintAction;
 
 /* Character Components */
-private:
-	UPROPERTY(EditAnywhere, Category = "Camera")
-	TObjectPtr<class UCameraComponent> FPSCameraComponent;
+//private:
+//	UPROPERTY(EditAnywhere, Category = "Camera")
+//	TObjectPtr<class UCameraComponent> FPSCameraComponent;
 
 };
